@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  </head>
+
+  <body>
+
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <div id="app-2">
+      <span v-bind:title="message">
+        {{ text }}
+      </span>
+    </div>
+
+    <div id="app-3">
+      <span v-if="seen">Now you see me</span>
+    </div>
+
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+
+
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <div id="app-foo">
+      <p>{{ foo }}</p>
+      <button v-on:click="foo = 'baz'">Change it</button>
+    </div>
+
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        ></todo-item>
+      </ol>
+    </div>
+
+    <div id="app-8">
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+    </div>
+
+    <div id="app-9" :style="{color: color, fontSize: fontSize + 'px'}">
+      <input v-model="newcolor">
+      <button :disabled="isButtonDisabled" v-on:click="changeColor">Change Color</button>
+      <button v-on:click="toggleDisable">{{ ButtonDisableAction }}</button>
+      <br>
+      <button @click="fontSize++">
+        Increase font size
+      </button>
+      <button v-on:click="fontSize--">
+        Decrease font size
+      </button>
+      <br>
+      <p>This should be {{ color}} and {{ fontSize }} px</p>
+      <p>{{ isButtonDisabled ? 'YES' : 'NO' }}</p>
+      <p> <input v-model="url"> <a v-bind:href="url"> LINK </a></p>
+    </div>
+
+    <!-- <div id="app">
+      {{ message }} {{ message }}
+      <app-nav></app-nav>
+      <app-view>
+        <app-sidebar></app-sidebar>
+        <app-content></app-content>
+      </app-view>
+    </div> -->
+
+    <div id="example">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+
+
+    <script src="/test.js"></script>
+
+  </body>
+</html>
