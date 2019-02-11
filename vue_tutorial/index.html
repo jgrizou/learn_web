@@ -4,6 +4,9 @@
   <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+    <link rel="stylesheet" href="styles.css?1">
+
+
   </head>
 
   <body>
@@ -93,7 +96,138 @@
     </div>
 
 
-    <script src="/test.js"></script>
+    <div id="binding" v-bind:class="classObject" v-bind:style="styleObject">
+      <p>{{ message }}</p>
+    </div>
+
+    <div id="conditional">
+      <h1 v-if="show">Yes Show</h1>
+      <h1 v-else>No Show</h1>
+      <h1 v-show="show">Hello!</h1>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" v-model="inputvalue">
+      </template>
+      <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" v-model="inputvalue">
+      </template>
+      <br>
+      <button v-on:click="toggleinput">{{ buttonAction }}</button>
+      <button v-on:click="submit">Submit</button>
+      <button v-on:click="toggleshow">{{ showAction }}</button>
+      <button v-on:click="toggleshow">{{ show ? 'Hide' : 'Show' }}</button>
+    </div>
+
+    <div id="list">
+      <ul>
+        <li v-for="(item, index) in items">
+          {{ parentMessage }} - {{ index}} {{ item.message }}
+        </li>
+      </ul>
+      <ul>
+        <li v-for="(value, key, index) in object">
+          {{ index }}. {{ key }}: {{ value }}
+        </li>
+      </ul>
+      <ul>
+        <li v-for="n in evenNumbers">{{ n }}</li>
+      </ul>
+      <ul>
+        <li v-for="n in even(numbers)">{{ n }}</li>
+      </ul>
+      <div>
+        <li v-for="n in range">{{ n }} </li>
+      </div>
+      <ul v-if="todos.length">
+        <li v-for="todo in todos">
+          {{ todo }}
+        </li>
+      </ul>
+      <p v-else>No todos left!</p>
+    </div>
+
+    <!-- vm_list.items.push({message: '0'})
+
+    vm_list.items = vm_list.items.filter( function (item) {
+    	return item.message.match('Toto')
+    })
+
+    Vue.set(vm_list.object, 'test', 50) -->
+
+    <div id="todo-list-example">
+      <form v-on:submit.prevent="addNewTodo">
+        <label for="new-todo">Add a todo</label>
+        <input
+          v-model="newTodoText"
+          id="new-todo"
+          placeholder="E.g. Feed the cat"
+        >
+        <button>Add</button>
+      </form>
+      <ul>
+        <todo-item
+          v-for="(todo, index) in todos"
+          v-bind:key="todo.id"
+          v-bind:title="todo.title"
+          v-on:remove="todos.splice(index, 1)"
+        ></todo-item>
+      </ul>
+    </div>
+
+    <div id="example-1">
+      <button v-on:click="counter += 1">Add 1</button>
+      <p>The button above has been clicked {{ counter }} times.</p>
+    </div>
+
+    <div id="example-2">
+      <!-- `greet` is the name of a method defined below -->
+      <button v-on:click="greet">Greet</button>
+    </div>
+
+    <!-- example2.greet() // => 'Hello Vue.js!' -->
+
+
+    <div id="example-3">
+      <button v-on:click="say('hi')">Say hi</button>
+      <button v-on:click="say('what')">Say what</button>
+      <button v-on:click="warn('Form cannot be submitted yet.', $event)">
+        Submit
+      </button>
+      <button @click.right="onCtrlClick">A ctrl click</button>
+      <input v-on:keyup="onKey">
+    </div>
+
+    <div id="app_key">
+    </div>
+
+    <br>
+
+    <div id="components-demo">
+      <button-counter></button-counter><br>
+    </div>
+
+    <div id="components-posts">
+      <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+          v-on:enlarge-text="onEnlargeText"
+        ></blog-post>
+      </div>
+    </div>
+
+    <br>
+
+    <div id="components-input">
+      <alert-box>
+        {{ searchText }}
+      </alert-box>
+      <custom-input v-model="searchText"></custom-input>
+    </div>
+
+    <script src="/test.js?4"></script>
 
   </body>
 </html>
