@@ -14,6 +14,9 @@ template_folder=os.path.join(HERE_PATH, '../parcel_vue_default/dist')
 template_folder=os.path.normpath(template_folder)
 print(template_folder)
 
+# app = Flask(__name__, static_folder=template_folder, template_folder=template_folder, static_url_path='')
+
+
 app = Flask(__name__, template_folder=template_folder)
 app.config['SECRET_KEY'] = 'secret!'
 
@@ -26,6 +29,10 @@ import numpy as np
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return app.send_from_directory('', path)
 
 @socketio.on('connect')
 def test_connect():
